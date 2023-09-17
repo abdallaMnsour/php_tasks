@@ -29,8 +29,10 @@ function test_func(): string
   global $str, $int, $float, $active;
   if ($active) {
     $string = $str . AGE . $int + $float;
-    return $string;
+  } else {
+    $string = 'you are not active';
   }
+  return $string;
 }
 
 echo test_func();
