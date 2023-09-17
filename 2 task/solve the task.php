@@ -36,9 +36,15 @@ function test_func(): string
 }
 
 echo test_func();
+
 echo '<br>################<br>';
+
 echo gettype(test_func());
+
 echo '<br>################<br>';
+
 var_dump(test_func());
+
 echo '<br>################<br>';
+
 print_r(test_func());
