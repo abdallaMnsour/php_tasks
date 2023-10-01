@@ -1,3 +1,6 @@
+<?php
+$is_login = true;
+?>
 <!doctype html>
 <html lang="en">
 
@@ -9,3 +12,17 @@
 </head>
 
 <body>
+
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand">Navbar</a>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <?php if ($is_login) : ?>
+          <button class="btn btn-outline-success" type="submit">login</button>
+        <?php else : ?>
+          <button class="btn btn-outline-danger" type="submit">logout</button>
+        <?php endif; ?>
+      </form>
+    </div>
+  </nav>
