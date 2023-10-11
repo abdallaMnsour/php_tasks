@@ -28,7 +28,8 @@ try {
 ##################
 echo '<br>===================<br>';
 
-echo strrev('ahmed') . '<br>'; // demha
+echo strrev('ahmed'); // demha
+echo '<br>or<br>';
 echo my_strrev('ahmed'); // demha
 
 function my_strrev(string $string): string
@@ -47,6 +48,19 @@ echo '<br>===================<br>';
 
 $name = 'hello my name is abdalla and my age is 22 year\'s old';
 
+function get_first_word(string $string): string
+{
+  $return = '';
+  for ($i = 0; $i < strlen($string) - 1; $i++) {
+    $return .= $string[$i];
+    if ($string[$i] == ' ') {
+      return $return;
+    }
+  }
+}
+
+echo get_first_word($name);
+echo '<br>or<br>';
 echo explode(' ', $name, 2)[0];
 
 ############
@@ -71,6 +85,8 @@ function random(int $length = 6): string
 
 # min 6 letters
 echo random(12);
+echo '<br>or<br>';
+echo uniqid();
 
 ############
 ## task 6 ##
