@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (array_key_exists($_POST['username'], $users) && $_POST['password'] == $users[$_POST['username']]) {
     header('location: https://themes.themesbrand.com/themebau/react/');
   } else {
-    $error = 'the username or password is wrong try again';
+    $error = 'the username or password is wrong <strong>try again</strong>';
   }
 }
 
