@@ -1,5 +1,5 @@
 <?php
-echo '<pre>';
+
 session_start();
 // يرسلك الي صفحه الداتا اول مره فقت لتعريف بعض المتغيرات
 if (!@$_SESSION['visit']) {
@@ -7,7 +7,6 @@ if (!@$_SESSION['visit']) {
   exit;
 }
 
-// print_r($_FILES);
 
 $image_errors = [];
 $image_types = ['jpg', 'jpeg', 'png'];
@@ -26,6 +25,7 @@ function input_is_empty($value)
 
 $users = $_SESSION['users'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
   $email = trim($_POST['email']);
   $username = trim($_POST['username']);
   $password1 = trim($_POST['password1']);
@@ -69,14 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 
   foreach ($users as $user) {
-    // if (!isset($errors[2])) {
     if ($email == $user['email']) {
       $errors['register'] = '<strong>email already exists</strong> : try type another email';
       break;
     }
-    // } else {
-    //   $errors['register'] = 'the password must be the same';
-    // }
   }
 
   if (isset($_FILES['image'])) {
@@ -98,13 +94,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 
-  // print_r($_FILES);
-  // print_r($image_errors);
+
   if (empty($image_errors)) {
 
     if (!isset($errors['register']) && $bool_image && $bool_email && $bool_password && $bool_username) {
 
-      $_SESSION['user'] = $users[] = [
+      $_SESSION['user'] = $_SESSION['users'][] = [
         'name' => $username,
         'image' => $image_name,
         'email' => $email,
@@ -113,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       header('location: index.php');
       exit;
     } elseif (!isset($errors['register']) && $bool_email && $bool_password && $bool_username) {
-      $_SESSION['user'] = $users[] = [
+      $_SESSION['user'] = $_SESSION['users'][] = [
         'name' => $username,
         'image' => 'default.png',
         'email' => $email,

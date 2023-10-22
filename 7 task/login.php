@@ -1,18 +1,14 @@
 <?php
 session_start();
+
 // يرسلك الي صفحه الداتا اول مره فقت لتعريف بعض المتغيرات
 if (!@$_SESSION['visit']) {
   header('location: data.php?page=' . basename(__FILE__));
   exit;
 }
 
-// $_SESSION['login'] = false;
 $users = $_SESSION['users'];
-// echo '<pre>';
-// print_r($_POST);
-// print_r($_SESSION);
-// print_r($_SERVER);
-// echo '</pre>';
+
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   foreach ($users as $user) {
