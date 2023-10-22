@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 $_SESSION['visit'] = true;
 
 $_SESSION['users'] = [
@@ -23,14 +22,3 @@ $_SESSION['users'] = [
     'password' => 'Ali456'
   ]
 ];
-
-
-/*
-  يقوم بتحويلك الي الصفحه اللتي جئت منها
-  اذا قمت بالدخول الي هذه الصفحه بطريقه مباشره يقوم بتحويلك الي صفحه الاندكس
-*/
-if (isset($_GET['page'])) {
-  header('location: ' . $_GET['page']);
-} else {
-  header('location: index.php');
-}

@@ -1,11 +1,9 @@
 <?php
 session_start();
-// يرسلك الي صفحه الداتا اول مره فقت لتعريف بعض المتغيرات
+// يقوم بإستدعاء ملف الداتا اول مره فقت عند فتح المتصفح
 if (!@$_SESSION['visit']) {
-  header('location: data.php?page=' . basename(__FILE__));
-  exit;
+  require_once 'data.php';
 }
-
 require_once 'layout/header.php';
 
 ?>

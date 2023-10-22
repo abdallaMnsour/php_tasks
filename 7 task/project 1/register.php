@@ -1,10 +1,9 @@
 <?php
 
 session_start();
-// يرسلك الي صفحه الداتا اول مره فقت لتعريف بعض المتغيرات
+// يقوم بإستدعاء ملف الداتا اول مره فقت عند فتح المتصفح
 if (!@$_SESSION['visit']) {
-  header('location: data.php?page=' . basename(__FILE__));
-  exit;
+  require_once 'data.php';
 }
 
 
@@ -75,16 +74,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 
+  // لا توجد مشكله اذا لم يقم المستخدم برفع صوره
   if (isset($_FILES['image'])) {
     $image = $_FILES['image'];
     if ($image['error'] == 0) {
-      if ($image['size'] < (2 * 1024 * 1024)) {
-        $type = end(explode('.', $image['name']));
-        var_dump($type);
+      if ($image['size'] < 2 * 1024 * 1024) {
+        // احصل علي صيغه الملف
+        $type = @end(explode('.', $image['name']));
+
         if (in_array($type, $image_types)) {
-          $image_name = uniqid() . '.' . $type;
-          move_uploaded_file($image['tmp_name'], 'images/' . $image_name);
-          $bool_image = true;
+          // $image_name = uniqid() . '.' . $type;
+          // move_uploaded_file($image['tmp_name'], 'images/' . $image_name);
+          // $bool_image = true;
+
         } else {
           $image_errors['type'] = 'You cannot upload files, only images';
         }
