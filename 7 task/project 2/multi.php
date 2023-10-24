@@ -1,7 +1,7 @@
 <?php
 
 $errors = [];
-$bool = false;
+
 $upload_success = false;
 
 if (isset($_FILES['image'])) {
