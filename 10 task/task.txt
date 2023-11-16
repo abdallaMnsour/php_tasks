@@ -1,0 +1,88 @@
+
+============================
+========== task 1 ==========
+============================
+
+
+SELECT
+  CONCAT(employees.first_name, " ", employees.last_name) AS full_name,
+  departments.department_name,
+  locations.city,
+  countries.country_name,
+  regions.region_name
+FROM
+  employees,
+  departments,
+  locations,
+  countries,
+  regions
+WHERE
+  employees.department_id = departments.department_id AND
+  departments.location_id = locations.location_id AND
+  locations.country_id = countries.country_id AND
+  countries.region_id = regions.region_id;
+
+
+============================
+========== task 2 ==========
+============================
+
+SELECT
+  departments.department_name,
+  countries.country_name
+FROM
+  departments,
+  countries,
+  locations
+WHERE
+  departments.location_id = locations.location_id AND
+  locations.country_id = countries.country_id;
+
+============================
+========== task 3 ==========
+============================
+
+SELECT
+  e.manager_id,
+  (SELECT concat(first_name, " ", last_name) FROM employees WHERE employee_id = e.manager_id) AS manager_name,
+  (SELECT COUNT(gender) FROM employees WHERE manager_id = e.manager_id and gender = 0) AS male,
+  (SELECT COUNT(gender) FROM employees WHERE manager_id = e.manager_id and gender = 1) AS female,
+  COUNT(manager_id) AS total
+FROM
+  employees e
+WHERE
+  e.manager_id IS NOT null
+GROUP BY
+  e.manager_id;
+
+============================
+========== task 4 ==========
+============================
+
+SELECT
+  first_name,
+  floor(DATEDIFF(CURRENT_DATE(), hire_date) / 365) AS years,
+  TIMESTAMPDIFF(MONTH, hire_date, CURDATE()) % 12 AS months,
+  day(now()) AS day FROM employees;
+
+============================
+========== task 5 ==========
+============================
+
+SELECT
+  sum(salary),
+  countries.country_name
+FROM
+  employees,
+  countries,
+  departments,
+  locations
+WHERE
+  employees.department_id = departments.department_id AND
+  departments.location_id = locations.location_id AND
+  locations.country_id = countries.country_id
+GROUP BY
+  country_name;
+
+
+
