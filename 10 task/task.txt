@@ -62,8 +62,8 @@ GROUP BY
 SELECT
   first_name,
   floor(DATEDIFF(CURRENT_DATE(), hire_date) / 365) AS years,
-  TIMESTAMPDIFF(MONTH, hire_date, CURDATE()) % 12 AS months,
-  day(now()) AS day FROM employees;
+  floor(datediff(CURRENT_DATE, hire_date) / 365 * 12) % 12 AS months,
+  day(now()) AS day from employees;
 
 ============================
 ========== task 5 ==========
