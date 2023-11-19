@@ -1,5 +1,21 @@
 <?php
 session_start();
+
+if (isset($_SESSION['person'])) {
+    $username = $_SESSION['person']['username'];
+    $email = $_SESSION['person']['email'];
+    $password1 = $_SESSION['person']['password1'];
+    $password2 = $_SESSION['person']['password2'];
+    $gender = $_SESSION['person']['gender'];
+    $type = $_SESSION['person']['type'];
+} else {
+    $username = '';
+    $email = '';
+    $password1 = '';
+    $password2 = '';
+    $gender = '';
+    $type = '';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -176,38 +192,31 @@ session_start();
         <h3>Register Here</h3>
 
         <label for="username">Username</label>
-        <input name="username" type="text" placeholder="username" id="username" value="<?= @$_SESSION['person']['username'] ?? '' ?>" />
+        <input name="username" type="text" placeholder="username" id="username" value="<?= $username ?>" />
 
         <?php if (isset($_SESSION['errors']['username'])) : ?>
             <div style="color: #ff7777;padding-top: 10px"><?= $_SESSION['errors']['username'] ?></div>
         <?php endif; ?>
 
         <label for="email">Email</label>
-        <input name="email" type="email" placeholder="email" id="email" value="<?= @$_SESSION['person']['email'] ?? '' ?>" />
+        <input name="email" type="email" placeholder="email" id="email" value="<?= $email ?>" />
 
         <?php if (isset($_SESSION['errors']['email'])) : ?>
             <div style="color: #ff7777;padding-top: 10px"><?= $_SESSION['errors']['email'] ?></div>
         <?php endif; ?>
 
-        <!-- <label for="img">Profile Image</label>
-        <input name="image" type="file" id="img"> -->
-
-        <?php if (isset($_SESSION['errors']['image'])) : ?>
-            <div style="color: #ff7777;padding-top: 10px"><?= $_SESSION['errors']['image'] ?></div>
-        <?php endif; ?>
-
         <label>Gender</label>
-        <input name="gender" value="0" type="radio" id="male" <?= isset($_SESSION['person']['gender']) ? ($_SESSION['person']['gender'] == '0' ? 'checked' : '') : ''?> checked><label for="male" class="spn-radio">male</label>
-        <input name="gender" value="1" type="radio" id="female" <?= isset($_SESSION['person']['gender']) ? ($_SESSION['person']['gender'] == '1' ? 'checked' : '' ): ''?>><label for="female" class="spn-radio">female</label>
+        <input name="gender" value="0" type="radio" id="male" <?= $gender == '0' ? 'checked' : '' ?> checked><label for="male" class="spn-radio">male</label>
+        <input name="gender" value="1" type="radio" id="female" <?= $gender == '1' ? 'checked' : '' ?>><label for="female" class="spn-radio">female</label>
 
         <?php if (isset($_SESSION['errors']['gender'])) : ?>
             <div style="color: #ff7777;padding-top: 10px"><?= $_SESSION['errors']['gender'] ?></div>
         <?php endif; ?>
 
         <select name="type" id="type" style='background: black'>
-            <option <?= @$_SESSION['person']['type'] == 'owner' ? 'selected' : '' ?> value="owner">owner</option>
-            <option <?= @$_SESSION['person']['type'] == 'manager' ? 'selected' : '' ?> value="manager">manager</option>
-            <option <?= @$_SESSION['person']['type'] == 'normal_user' ? 'selected' : '' ?> selected value="normal_user">normal_user</option>
+            <option <?= $type == 'normal_user' ? 'selected' : '' ?> selected value="normal_user">normal_user</option>
+            <option <?= $type == 'owner' ? 'selected' : '' ?> value="owner">owner</option>
+            <option <?= $type == 'manager' ? 'selected' : '' ?> value="manager">manager</option>
         </select>
 
         <?php if (isset($_SESSION['errors']['type'])) : ?>
@@ -215,14 +224,14 @@ session_start();
         <?php endif; ?>
 
         <label for="password">Password</label>
-        <input name="password1" type="password" placeholder="Password" id="password" value="<?= @$_SESSION['person']['password1'] ?? '' ?>">
+        <input name="password1" type="password" placeholder="Password" id="password" value="<?= $password1 ?>">
 
         <?php if (isset($_SESSION['errors']['password'])) : ?>
             <div style="color: #ff7777;padding-top: 10px"><?= $_SESSION['errors']['password'] ?></div>
         <?php endif; ?>
 
         <label for="co-password">confirm Password</label>
-        <input name="password2" type="password" placeholder="Confirm Password" id="co-password" value="<?= @$_SESSION['person']['password2'] ?? '' ?>">
+        <input name="password2" type="password" placeholder="Confirm Password" id="co-password" value="<?= $password2 ?>">
 
         <?php if (isset($_SESSION['errors']['password2'])) : ?>
             <div style="color: #ff7777;padding-top: 10px"><?= $_SESSION['errors']['password2'] ?></div>
